@@ -56,7 +56,7 @@ export default class Register extends Component{
             }; 
             
             axios 
-            .post("http://localhost/IWantThis/insert.php", obj)
+            .post("http://localhost/insert.php", obj)
             .then(response => console.log(response.data)); 
 
             this.setState({
