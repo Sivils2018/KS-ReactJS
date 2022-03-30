@@ -24,5 +24,4 @@ function connect()
     return $connect; 
 }
 
-
 $con = connect(); 
