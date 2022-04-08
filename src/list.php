@@ -1,33 +1,38 @@
 <?php 
 
 require_once("config.php");
+require_once("insert.php"); 
 
-$request = file_get_contents("php://input");
+$request = json_decode(file_get_contents('php://input'));
 
-error_reporting(E_ERROR);
-$users = [];
-$sql = "SELECT * FROM `users` WHERE email == '$email' AND password == 'md5($password)'"; 
 
-if ($data = mysqli_query($con, $sql))
+
+if(isset($request) && !empty($request))
 {
-    $cr = 0;
-    while($row = mysqli_fetch_assoc($data))
-    {
-        $users[$cr]['user_id']= $row['user_id'];
-        $users[$cr]['fname']= $row['fname'];
-        $users[$cr]['lname']= $row['lname'];
-        $users[$cr]['email']= $row['email'];
-        $users[$cr]['password']= $row['password'];
-        $cr++;
-    }
 
-    echo json_encode($users);
-    http_response_code(200);
+$query = "SELECT * FROM `users` WHERE email= '" . $request->email . "' AND password= '" . $request->password . "'" ; 
+
+
+
+$result = $con->query($query); 
+
+
+            if ($result->num_rows > 1)
+                {
+                    $row=mysqli_fetch_assoc($result);
+                    $response=array("Message" => "success", "displayName" => $row['fname'] . " " . $row['lname']); 
+                    echo json_encode($response);
+                    http_response_code(201);
+                }
+            else 
+                {   
+                $error = array("Message" => "Invalid email/password");
+                echo json_encode($error);
+                http_response_code(401);
+                }
 }
 else 
 {
-    $data = array("message" => "Wrong Email or Password. Please Try Again.");
-    echo json_encode($data);
+    http_response_code(404); 
 }
-
 ?>
