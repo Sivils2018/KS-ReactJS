@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import '../components/App.css';
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import App from 'App'
 
 
 export default class Register extends Component {
@@ -20,9 +21,7 @@ export default class Register extends Component {
             last_name: '',
             email: '',
             password: '',
-            redirect: false,
-            authenticate: false
-
+            redirect: false
         }
     }
 
@@ -44,7 +43,7 @@ export default class Register extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const userData =
+        const obj =
         {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -52,40 +51,38 @@ export default class Register extends Component {
             password: this.state.password
 
         };
-
-
         axios
-            .post("http://localhost/insert.php", userData)
-            .then(response => console.log(response.data))
-        if (this.state) {
-            localStorage.setItem('FirstName', this.state.first_name); 
-            this.setState({ redirect: true });
-            this.setState({authenticated: true}); 
-        }
-        else {
-            console.log("Error");
-        };
-
-        this.setState({
-            first_name: '',
-            last_name: '',
-            email: '',
-            password: ''
-        });
+            .post("http://localhost/insert.php", obj)
+            .then(response => 
+            {
+            console.log(response.data);
+            if(this.state){
+            localStorage.setItem("name" , obj.first_name); 
+            this.setState({redirect: true}); 
+            }
+            else {
+                console.log("Error")
+            }
+            this.setState({
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    password: ''
+                });
+            })
+            .catch(err =>
+            {
+                console.log(err)
+            });
     }
-
-
     render() {
-
-        if (this.state.redirect) {
-            return (
-                <Navigate to={'/Home'} />
-                              
-
-            )
+        {
+            if(this.state.redirect) 
+            {
+                return (<Navigate to= {'/Home'} />)
+            }
         }
-
-
+        <App />
         return (
             <div className="register">
                 <h3>Register</h3>

@@ -8,16 +8,16 @@ import Card from 'Cards/Cards';
 export default function Home (){
     
     return (
-        <><div>
-            <h3 style={{padding: "50px", display: "flex", justifyContent: "center"}}>Categories</h3>
+    <><div>
+            <h3 style={{ padding: "50px", display: "flex", justifyContent: "center" }}>Categories</h3>
         </div><div>
-            <Card>
-                <ul>
-                     <li><Link to="/Products"> Sports </Link></li> 
-                        <li> <Link to="/Products"> Beauty </Link></li> 
-                     <li> <Link to= "/Products"> Clothes </Link></li>
-                </ul>
-            </Card>
-            </div></> 
+                <Card>
+                    <ul>
+                        <li><Link to="/Products"> Sports </Link></li>
+                        <li> <Link to="/Products"> Beauty </Link></li>
+                        <li> <Link to="/Products"> Clothes </Link></li>
+                    </ul>
+                </Card>
+            </div></>
         ); 
     }
