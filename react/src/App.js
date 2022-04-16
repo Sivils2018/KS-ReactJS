@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, Nav, NavDropdown} from "react-router-dom"; 
+import { BrowserRouter as Router, Routes, Route, Link, Navigate} from "react-router-dom"; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import {Login, Wishlist, Register, Home, Products, Header} from './components';
+import {Login, Wishlist, Register, Home, Products, Header, SingleProduct} from './components';
 import { Navbar, Button, Badge} from "reactstrap";
 import React, { Component } from "react";
 import authenticated from "constants/authenticated";
+import { useParams } from "react-router";
 
 class App extends Component {
 constructor(props)
@@ -22,7 +23,7 @@ update() {
 
 onClick(e){
       e.preventDefault();
-      localStorage.clear("name");
+      localStorage.clear("name")
 }
 
 render () 
@@ -35,20 +36,17 @@ return (
  <div className="collapse navbar-collapse" id="navbarSupportContent">
       <ul className="navbar-nav mr-auto" style={{margin: "20px"}}>
             <li className="nav-item"> <Link to={"/Home"} className="nav-link">Home </Link> </li>
+            {localStorage.getItem("name") ? '' : <>
             <li className="nav-item"> <Link to={"/Login"} className="nav-link">Login </Link> </li>
             <li className="nav-item"> <Link to={"/Register"} className="nav-link"> Register </Link> </li>
+            </>
+            }
       </ul>
 </div>
       <div>
             <nav>
-            <div>
-            <ul className = "navbar-nav mr-auto" style= {{margin: "20px"}}>
-                <li className = "nav-item"> Welcome! { localStorage.getItem("name") ? `${localStorage.getItem("name")}` : " " } </li>
-                <li className="nav-item"> <Link to={"/Wishlist"} className="nav-link"> <Badge bg= "primary"> 0 </Badge></Link></li>
-            {authenticated.getAuthentication() ? <button onClick={() => {this.setState({redirect: false}); authenticated.changeAuthentication(); localStorage.clear("name");}}> Log Out </button> :
-            <button onClick={() => {this.setState({redirect: true}); authenticated.changeAuthentication();}}> Log In </button> }
-            </ul> 
-            </div>
+            {!localStorage.getItem("name") ? (<><Link className="dropdown-item" to="/Login"> Log In </Link><Link className="dropdown-item" to="/Register"> Sign Up</Link></>):(<><Link className="dropdown-item" to="/Wishlist"> Welcome, {localStorage.getItem("name")} <Badge bg= "primary"> 0 </Badge></Link></>)}
+
             </nav>
       </div>
 </nav>
@@ -58,7 +56,8 @@ return (
       <Route path="/Login" element={<Login />} />
       <Route path="/Register" element={<Register />} />
       <Route path="/Wishlist" element={<Wishlist />} />
-      <Route path='/Products' element={<Products />} /> 
+      <Route path='/Products/:id' element={<Products />} />
+      <Route path='/Products/:id/:id' element={<SingleProduct />} />  
    </Routes> 
  </div> 
  </Router>
