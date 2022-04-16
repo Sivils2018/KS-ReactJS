@@ -12,30 +12,27 @@ class Products extends Component
     constructor(props) 
     {
         super(props);
-        this.state = { products: [] }; 
+        this.state = { 
+            products: [] 
+        }
     }
 
     
-    componentDidMount()
+componentDidMount()
     {
-        let thisId = this.props.params.id;
-        axios.get('http://localhost/view.php?id=', + thisId)
+        let thisID = this.props.params.id;
+        axios.get('http://localhost/view.php?id=' + thisID)
         .then(response => 
             {
                 this.setState({products: response.data});
-                console.log(response);
-            })
-            .catch(function(error)
-            {
-                console.log(error);
-            }); 
+            });
     }
     productsList()
     {
         return this.state.products.map(function (object, i)
         {
             return <ProductsList obj={object} key={i} />; 
-        })
+        }); 
     }
     render() 
     {
