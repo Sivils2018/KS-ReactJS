@@ -57,7 +57,7 @@ return (
       <Route path="/Register" element={<Register />} />
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path='/Products/:id' element={<Products />} />
-      <Route path='/Products/:id/:id' element={<SingleProduct />} />  
+      <Route path='/Product/:id' element={<SingleProduct />} />  
    </Routes> 
  </div> 
  </Router>
