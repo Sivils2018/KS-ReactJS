@@ -1,39 +1,34 @@
-<?php 
+<?php
 cors();
+
 require_once("config.php");
 //require_once("insert.php"); 
 
+error_reporting(E_ERROR);
 $request = json_decode(file_get_contents('php://input'));
 
 
-
-if(isset($request) && !empty($request))
+if(isset($_GET['user_id']))
 {
+        $user_id = $_GET['user_id'];
+        $product_id = $request->product->product; 
 
-$query = "SELECT * FROM `users` WHERE email= '" . $request->email . "' AND password= '" . $request->password . "'" ; 
-
-
-
-$result = $con->query($query); 
-
-
-            if ($result->num_rows > 1)
-                {
-                    $row=mysqli_fetch_assoc($result);
-                    $response=array("Message" => "success", "displayName" => $row['fname'] . " " . $row['lname'], 'user_id'=> $row['user_id']); 
-                    echo json_encode($response);
-                    http_response_code(201);
-                }
-            else 
-                {   
-                $error = array("Message" => "Invalid email/password");
-                echo json_encode($error);
-                http_response_code(401);
-                }
-}
-else 
-{
-    http_response_code(404); 
+        $sql = "SELECT * FROM `wishlist` where `product_id` = $product_id AND `user_id` = $user_id";
+        $result = mysqli_query($con, $sql);
+    
+        if (mysqli_num_rows($result) == 1)
+        {
+            echo("Product Already Favorited");
+        }
+        else
+        {
+            $insert = "INSERT INTO `wishlist` VALUES (" . $product_id . ", 1, " . $user_id . ", null)"; 
+            echo $insert;
+            if(mysqli_query($con, $insert))
+            {
+             http_response_code(200);
+            }
+        }
 }
 
 function cors() {
@@ -60,4 +55,5 @@ function cors() {
         exit(0);
     }
 }
+
 ?>
