@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, Redirect} from "react-router-dom"; 
 import axios from 'axios'; 
 import CategoriesList from './CategoriesList'
+import Header from './Header'; 
 
 
 
@@ -39,12 +40,15 @@ export default class Home extends Component {
   render() 
   {
       return (
+          <>
+          <Header /> 
           <div className="h3">
               <h3>Categories</h3>
               <div className='row'>
                   {this.CategoriesList()}
               </div>
           </div>
+          </>
       )
   }
 }

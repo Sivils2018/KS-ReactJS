@@ -3,6 +3,7 @@ import '../components/App.css';
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 import App from 'App'
+import Header from "./Header";
 
 
 export default class Register extends Component {
@@ -82,19 +83,17 @@ export default class Register extends Component {
                 return (<Navigate to= {'/Home'} />)
             }
         }
-        <App />
         return (
-            <div className="register">
+            <><Header /><div className="register">
                 <h3>Register</h3>
-                <form onSubmit={this.onSubmit} >
+                <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>First Name:</label>
                         <input
                             type="text"
                             className="form-control"
                             value={this.state.first_name}
-                            onChange={this.onChangeFirstName}
-                        />
+                            onChange={this.onChangeFirstName} />
                     </div>
                     <div className="form-group">
                         <label>Last Name:</label>
@@ -102,8 +101,7 @@ export default class Register extends Component {
                             type="text"
                             className="form-control"
                             value={this.state.last_name}
-                            onChange={this.onChangeLastName}
-                        />
+                            onChange={this.onChangeLastName} />
                     </div>
                     <div className="form-group">
                         <label>Email:</label>
@@ -111,8 +109,7 @@ export default class Register extends Component {
                             type="text"
                             className="form-control"
                             value={this.state.email}
-                            onChange={this.onChangeEmail}
-                        />
+                            onChange={this.onChangeEmail} />
                     </div>
                     <div className="form-group">
                         <label>Password:</label>
@@ -120,18 +117,16 @@ export default class Register extends Component {
                             type="password"
                             className="form-control"
                             value={this.state.password}
-                            onChange={this.onChangePassword}
-                        />
+                            onChange={this.onChangePassword} />
                     </div>
                     <div className="form-group">
                         <input
                             type="submit"
                             value="Register User"
-                            className="btn btn-primary"
-                        />
+                            className="btn btn-primary" />
                     </div>
                 </form>
-            </div>
+            </div></>
         )
     }
 }

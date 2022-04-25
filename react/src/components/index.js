@@ -6,9 +6,11 @@ import Products from './Products';
 import CategoriesList from "./CategoriesList";
 import ProductsList from './ProductsList';
 import SingleProduct from './SingleProduct';
+import Header from './Header'; 
 
 
 
 
 
-export {Login, Register, Wishlist, Home, Products, CategoriesList, SingleProduct, ProductsList}; 
+
+export {Login, Register, Wishlist, Home, Products, CategoriesList, SingleProduct, ProductsList, Header}; 

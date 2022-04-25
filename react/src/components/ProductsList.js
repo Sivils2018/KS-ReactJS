@@ -9,9 +9,9 @@ class ProductsList extends Component
     render()
     {
         return(     
-            <div className ='card col-4'>
+            <div className ='cards'>
                 <div className = 'card-body'> 
-                <img src={`${this.props.obj.image}.jpg`} className = "img-fluid"></img>
+                <img src={`${this.props.obj.product_id}.jpg`} className = "img-fluid"></img>
                 <div>
                     {this.props.obj.name}</div>
                 <div>Price: ${this.props.obj.price} </div>

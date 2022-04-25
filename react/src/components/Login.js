@@ -2,7 +2,7 @@ import '../components/App.css';
 import axios from "axios";
 import React, { Component } from "react"
 import { BrowserRouter as Router, Routes, Route, Link, Navigate} from "react-router-dom";
-import App from "App"; 
+import Header from './Header';
 
 
 export default class Login extends Component {
@@ -50,6 +50,7 @@ OnSubmit(e)
     else
     {
     localStorage.setItem("name" , response.data.displayName);
+    localStorage.setItem("user_id", response.data.user_id); 
     this.setState({
       email: '',
       password: '',
@@ -69,9 +70,8 @@ render()
   {
     return <Navigate to={'/Home'} /> 
   } 
-        <App /> 
         return (
-          <div className="form">
+          <><Header /><div className="form">
             <h1>Login</h1>
             <form onSubmit={this.OnSubmit}>
               <div className="form-group">
@@ -86,7 +86,7 @@ render()
                 <input type="submit" value="Login" />
               </div>
             </form>
-          </div>
+          </div></>
         );
       }
   }

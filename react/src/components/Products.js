@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import ProductsList from "./ProductsList"; 
 import axios from 'axios'; 
 import { useParams } from "react-router-dom"
+import Header from "./Header";
 
 class Products extends Component 
 
@@ -37,12 +38,12 @@ componentDidMount()
     render() 
     {
         return (
-             <div>
-                 <h3>Products</h3>
-                <div className = 'row'>
+            <><Header /><div>
+                <h3>Products</h3>
+                <div className='row'>
                     {this.productsList()}
                 </div>
-             </div>
+            </div></>
         ); 
     }
 }
